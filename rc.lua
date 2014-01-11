@@ -83,11 +83,7 @@ end
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-<<<<<<< HEAD
-    tags[s] = awful.tag({ 'main','www','music','Skype','IRC' }, s, layouts[1])
-=======
     tags[s] = awful.tag({ "main","www","media","Skype","IRC"}, s, layouts[1])
->>>>>>> dev
 end
 -- }}}
 
@@ -275,8 +271,6 @@ globalkeys = awful.util.table.join(
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end)
 
-    -- Internet
---    awful.key({ modkey }, "o", function() os.execute("chromium &") end)
 )
 
 clientkeys = awful.util.table.join(
