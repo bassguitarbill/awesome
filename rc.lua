@@ -83,7 +83,11 @@ end
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
+<<<<<<< HEAD
     tags[s] = awful.tag({ 'main','www','music','Skype','IRC' }, s, layouts[1])
+=======
+    tags[s] = awful.tag({ "main","www","media","Skype","IRC"}, s, layouts[1])
+>>>>>>> dev
 end
 -- }}}
 
@@ -269,10 +273,10 @@ globalkeys = awful.util.table.join(
                   awful.util.getdir("cache") .. "/history_eval")
               end),
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end),
+    awful.key({ modkey }, "p", function() menubar.show() end)
 
     -- Internet
-    awful.key({ modkey }, "o", function() os.execute("chromium &") end)
+--    awful.key({ modkey }, "o", function() os.execute("chromium &") end)
 )
 
 clientkeys = awful.util.table.join(
@@ -342,9 +346,36 @@ clientbuttons = awful.util.table.join(
     awful.button({ modkey }, 3, awful.mouse.client.resize))
 
 -- Set keys
-root.keys(globalkeys)
+
 -- }}}
 
+-- Custom keys for each screen
+customkey = "o"
+
+
+globalkeys = awful.util.table.join(globalkeys,
+ 	awful.key({ modkey }, customkey , function() 
+	x = awful.tag.selected(mouse.screen) 
+	local cmd = {}
+-- - main will start terminal
+	cmd[1] = "xterm"
+-- - www will start a web browser
+	cmd[2] = "chromium"
+-- - music will start the vlc player
+	cmd[3] = "vlc"
+-- - skype, yeah
+	cmd[4] = "skype"
+-- - IRC is my IRC client, xchat
+	cmd[5] = "xchat"
+	for i,v in ipairs( tags[mouse.screen]) do
+	  if v == x then
+	    os.execute(cmd[i] .. " &")
+	    break
+	  end
+	end
+    end)
+)
+root.keys(globalkeys)
 -- {{{ Rules
 awful.rules.rules = {
     -- All clients will match this rule.
