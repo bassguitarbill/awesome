@@ -10,6 +10,7 @@ local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
+require("custom_commands")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -81,9 +82,10 @@ end
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = {}
+cmds.read()
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ "main","www","media","Skype","IRC"}, s, layouts[1])
+    tags[s] = awful.tag(cmds.getnames(), s, layouts[1])
 end
 -- }}}
 
@@ -350,20 +352,9 @@ customkey = "o"
 globalkeys = awful.util.table.join(globalkeys,
  	awful.key({ modkey }, customkey , function() 
 	x = awful.tag.selected(mouse.screen) 
-	local cmd = {}
--- - main will start terminal
-	cmd[1] = "xterm"
--- - www will start a web browser
-	cmd[2] = "chromium"
--- - music will start the vlc player
-	cmd[3] = "vlc"
--- - skype, yeah
-	cmd[4] = "skype"
--- - IRC is my IRC client, xchat
-	cmd[5] = "xchat"
 	for i,v in ipairs( tags[mouse.screen]) do
 	  if v == x then
-	    os.execute(cmd[i] .. " &")
+	    os.execute(cmds.getcmds()[i] .. " &")
 	    break
 	  end
 	end

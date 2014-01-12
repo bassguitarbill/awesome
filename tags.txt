@@ -1,0 +1,5 @@
+main|xterm
+www|chromium
+media|vlc
+Skype|skype
+IRC|xchat
