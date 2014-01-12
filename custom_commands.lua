@@ -2,11 +2,12 @@ local custom_commands = {}
 
 names = {}
 cmds = {}
+tags_path = "/home/bill/.config/awesome/tags.txt"
 
 function cmds.read()
 	local x = 1
 
-	for line in io.lines("/home/bill/.config/awesome/tags.txt") do
+	for line in io.lines(tags_path) do
 		for k,v in string.gmatch(line, "(%w+)|(%w+)") do 
 			names[x] = k
 			cmds[x] = v
