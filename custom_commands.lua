@@ -8,10 +8,14 @@ function cmds.read()
 	local x = 1
 
 	for line in io.lines(tags_path) do
-		for k,v in string.gmatch(line, "(%w+)|(%w+)") do 
-			names[x] = k
-			cmds[x] = v
-			x = x+1
+		if string.match(line, "#.*")
+			then print("comment")	
+		else 
+			for k,v in string.gmatch(line, "(%w+)|(%w+)") do 
+				names[x] = k
+				cmds[x] = v
+				x = x+1
+			end
 		end
 	end
 end
