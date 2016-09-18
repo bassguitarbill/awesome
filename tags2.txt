@@ -2,7 +2,10 @@
 # Each line represents a separate tag
 # Before the pipe is the name of the tag (displayed in the top-left by default)
 # After the pipe is the command that should be executed (Default is MOD4 + "o")
-main|xterm
-www|chromium
-media|vlc
-Skype|skype
+main|terminology
+www|opera
+Steam|steam
+GIMP|gimp
+doodle|terminology -e "vim -S ~/doodle/src/session.vim"
+vim|vim
+gfx|nvidia-settings

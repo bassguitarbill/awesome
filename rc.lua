@@ -281,7 +281,11 @@ globalkeys = awful.util.table.join(
                   awful.util.getdir("cache") .. "/history_eval")
               end),
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end)
+    awful.key({ modkey }, "p", function() menubar.show() end),
+
+    -- CCs
+    awful.key({ modkey }, "e", cmds.addtag),
+    awful.key({ modkey }, "d", cmds.remtag)
 )
 
 clientkeys = awful.util.table.join(
@@ -464,3 +468,5 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+--
+
