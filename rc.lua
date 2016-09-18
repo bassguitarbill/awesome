@@ -78,9 +78,18 @@ end
 setWallpaper()
 -- }}}
 
+-- {{{ Custom commands module
+-- cmds: table containing getnames() and getcmds()
+-- tags_path: path to the tag config file
+
+local tags_path = "/home/bill/.config/awesome/tags.txt"
+local cmds = require("./custom_commands")
+cmds = cmds(tags_path)
+
+-- }}}
+
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
-local cmds = require("./custom_commands")
 tags = {}
 for s = 1, screen.count() do
     tags[s] = awful.tag(cmds.getnames(), s, layouts[1])

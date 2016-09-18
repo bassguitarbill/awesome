@@ -1,29 +1,33 @@
-local custom_commands = {}
+local custom_commands = function(tags_path)
 
-names = {}
-cmds = {}
-tags_path = "/home/bill/.config/awesome/tags.txt"
+    names = {}
+    cmds = {}
+    local cc = {}
 
-function read()
-    local x = 1
+    function read()
+        local x = 1
 
-    for line in io.lines(tags_path) do
-        if string.match(line, "#.*")
-            then print("comment")   
-        else 
-            for k,v in string.gmatch(line, "(.+)|(.+)") do 
-                names[x] = k
-                cmds[x] = v
-                x = x+1
+        for line in io.lines(tags_path) do
+            if string.match(line, "#.*")
+                then print("comment")   
+                else 
+                    for k,v in string.gmatch(line, "(.+)|(.+)") do 
+                        names[x] = k
+                        cmds[x] = v
+                        x = x+1
+                    end
+                end
             end
         end
+
+        read()
+
+        function cc.getnames() return names end
+
+        function cc.getcmds() return cmds end
+
+        return cc
+
     end
-end
 
-read()
-
-function custom_commands.getnames() return names end
-
-function custom_commands.getcmds() return cmds end	
-
-return custom_commands
+    return custom_commands
